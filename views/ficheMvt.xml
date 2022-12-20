@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <record id='Fiche_action' model='ir.actions.act_window'>
+        <field name="name">Fiche de mouvement</field>
+        <field name="res_model">rachid.fiche.mvt</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+
+    <menuitem name="Fiche de mouvement" id="Fiche_menu" parent="operation_menu" action="Fiche_action"/>
+
+</odoo>

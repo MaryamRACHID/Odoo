@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <record id='typeStock_action' model='ir.actions.act_window'>
+        <field name="name">Type de stock</field>
+        <field name="res_model">rachid.type.stock</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+
+    <menuitem name="Type de stock" id="typeStock__menu" parent="config_menu" action="typeStock_action"/>
+
+</odoo>

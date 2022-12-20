@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <record id='Role_action' model='ir.actions.act_window'>
+        <field name="name">Role</field>
+        <field name="res_model">rachid.role</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+
+    <menuitem name="Role" id="Role_menu" parent="config_menu" action="Role_action"/>
+
+</odoo>

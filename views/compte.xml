@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <record id='Compte_action' model='ir.actions.act_window'>
+        <field name="name">Compte</field>
+        <field name="res_model">rachid.compte</field>
+        <field name="view_mode">tree,form,kanban,graph</field>
+    </record>
+
+    <menuitem name="Compte" id="Compte_menu" parent="stock_management" action="Compte_action"/>
+    <menuitem name="Compte" id="Compte_menu2" parent="Compte_menu" action="Compte_action"/>
+
+
+    <!-- Form View -->
+    <record id="compte_view_form" model="ir.ui.view">
+        <field name="name">Compte formulaire</field>
+        <field name="model">rachid.compte</field>
+        <field name="arch" type="xml">
+            <form>
+                <sheet>
+                    <group string="Informations générale">
+                        <group>
+                            <field name="alias" placeholder="Alias"/>
+                        </group>
+                        <group>
+                            <field name="date_creation" />
+                        </group>
+                    </group>
+
+                        <notebook>
+                            <group string="Affectation">
+                                <group>
+                                    <field  name="entreprise_id"/>
+                                </group>
+                                <group>
+                                    <field name="description" placeholder="Description"/>
+                                </group>
+                            </group>
+                        </notebook>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <!-- Tree(list) View -->
+    <record id="compte_view_tree" model="ir.ui.view">
+        <field name="name">Liste des comptes</field>
+        <field name="model">rachid.compte</field>
+        <field name="arch" type="xml">
+            <tree >
+                <field name="alias"/>
+                <field name="description"/>
+                <field name="date_creation"/>
+                <field name="entreprise_id"/>
+            </tree>
+        </field>
+    </record>
+
+    <!-- kanban View -->
+    <record id="class_dashboard" model="ir.ui.view">
+        <field name="name">rachid.compte.kanban</field>
+        <field name="model">rachid.compte</field>
+        <field name="priority">10</field>
+        <field name="arch" type="xml">
+            <kanban>
+                <field name = "alias"/>
+                <field name = "description"/>
+                <field name = "entreprise_id"/>
+                <templates>
+                    <t t-name="kanban-box">
+                        <div>
+                            <ul>
+                                <li t-if="record.alias.raw_value"><a>Alias du compte</a>: <field name="alias"/></li>
+                                <li t-if="record.description.raw_value">Description du compte: <field name="description"/></li>
+                                <li t-if="record.entreprise_id.raw_value">Entreprise: <field name="entreprise_id"/></li> 
+                            </ul>
+                        </div>
+                    </t>
+                </templates>
+            </kanban>
+        </field>
+    </record>
+
+    <!-- Graph View -->
+    <record id="compte_view_graph" model="ir.ui.view">
+        <field name="model">rachid.compte</field>
+        <field name="arch" type="xml">
+            <graph type="bar">
+                <field name="entreprise_id"/>
+            </graph>
+        </field>
+    </record>
+    
+</odoo>

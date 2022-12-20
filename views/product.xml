@@ -1,0 +1,141 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <record id='Produit_action' model='ir.actions.act_window'>
+        <field name="name">Produit</field>
+        <field name="res_model">rachid.product</field>
+        <field name="view_mode">tree,form,kanban</field>
+    </record>
+
+    <menuitem name="Produit" id="Produit_menu" parent="stock_management" action="Produit_action"/>
+
+    <!-- Form View -->
+    <record id="produit_view_form" model="ir.ui.view">
+        <field name="name">Formulaire des produit</field>
+        <field name="model">rachid.product</field>
+        <field name="arch" type="xml">
+            <form>
+                <sheet>
+                    <group string="Informations générale">
+                        <group>
+                            <field name="product_nom"/>
+                            <div class="oe_title">
+                                <div name="options">
+                                    <div>
+                                        <field name="sale_ok"/>
+                                        <label for="sale_ok"/>
+                                    </div>
+                                    <div>
+                                        <field name="purchase_ok"/>
+                                        <label for="purchase_ok"/>
+                                    </div>
+                                </div>
+                            </div>
+                        </group>
+                        <group>
+                            <field name="image" widget="image" class="oe_avatar"/>
+                        </group>
+                        <group>
+                            <field name="product_code"/>
+                            <field name="type_product"/>
+                        </group>
+                    </group>
+
+                    <notebook>
+                        <group string="Achat">
+                            <group string="Fournissuers">
+                                <field name="fournisseur_id">
+                                    <form>
+                                        <field name="code"/>
+                                        <field name="nom_resp"/>
+                                        <field name="prenom_resp"/>
+                                        <field name="adresse"/>
+                                        <field name="courriel"/>
+                                        <field name="gsm1"/>
+                                        <field name="gsm2"/>
+									</form>
+									<tree>
+                                        <field name="code" width="10"/>
+                                        <field name="nom_resp" width="13"/>
+                                        <field name="prenom_resp" width="13"/>
+                                        <field name="adresse" width="19"/>
+                                        <field name="courriel" width="19"/>
+                                        <field name="gsm1" width="13"/>
+                                        <field name="gsm2" width="13"/>
+									</tree>
+                                </field>
+                            </group>
+                            <group string="Description du produit">
+                                <field  name="description"/>
+                            </group>
+                        </group>
+                        <group string="Tarification">
+                            <group>
+                                <field  name="sale_prix" placeholder='00.0 $'/>
+                                <field  name="customer_taxes" placeholder='00.0 $'/>
+                                <field name="cout_product" placeholder='00.0 $'/>
+                            </group>
+                        </group>
+                    </notebook>
+
+                
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <!-- Tree(list) View -->
+    <record id="produit_view_tree" model="ir.ui.view">
+        <field name="name">Liste des produits</field>
+        <field name="model">rachid.product</field>
+        <field name="arch" type="xml">
+            <tree >
+                <field name="product_code" width="8"/>
+                <field name="product_nom" width="13"/>
+                <field name="description" width="15"/>
+                <field name="sale_ok" width="6"/>
+                <field name="purchase_ok" width="6"/>
+                <field name="sale_prix" width="10"/>
+                <field name="customer_taxes" width="10"/>
+                <field name="cout_product" width="10"/>
+                <field name="type_product" width="10"/>
+                <field name="fournisseur_id" width="12"/>
+            </tree>
+        </field>
+    </record>
+
+    <!-- kanban View -->
+    <record id="produit_dashboard" model="ir.ui.view">
+        <field name="name">rachid.product.kanban</field>
+        <field name="model">rachid.product</field>
+        <field name="priority">10</field>
+        <field name="arch" type="xml">
+            <kanban>
+                <field name = "image"/>
+                <field name = "product_code"/>
+                <field name = "product_nom"/>
+                <field name = "type_product"/>
+                <field name = "sale_prix"/>
+                <field name = "Id_code"/>
+                <templates>
+                    <t t-name="kanban-box">
+                        <div class="oe_kanban_global_click">
+                            <div class="o_kanban_image d-md-none">
+                                <img class="o_kanban_image_inner_pic" 
+                                    t-att-src="kanban_image('rachid.product', 'image', record.Id_code.raw_value)"/>
+                            </div>
+                            <ul>
+                                <li t-if="record.product_code.raw_value"><a>Nom : </a> <field name="product_code"/></li>
+                                <li t-if="record.product_nom.raw_value">Prénom : <field name="product_nom"/></li>
+                                <li t-if="record.type_product.raw_value">Role: <field name="type_product"/></li> 
+                                <li t-if="record.sale_prix.raw_value">Role: <field name="sale_prix"/></li> 
+                            </ul>
+                        </div>
+                    </t>
+                </templates>
+            </kanban>
+        </field>
+    </record>
+
+ 
+</odoo> 

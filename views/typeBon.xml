@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <record id='TypeBon_action' model='ir.actions.act_window'>
+        <field name="name">Type de bon</field>
+        <field name="res_model">rachid.type.bon</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+
+    <menuitem name="Configuration" id="config_menu" parent="stock_management"/>
+    <menuitem name="Type de bon" id="TypeBon_menu" parent="config_menu" action="TypeBon_action"/>
+
+</odoo>

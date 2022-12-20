@@ -1,0 +1,125 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <record id='ResStock_action' model='ir.actions.act_window'>
+        <field name="name">Responsable de stock</field>
+        <field name="res_model">rachid.responsable.stock</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+
+    <menuitem name="Responsable de stock" id="ResStock_menu" parent="Employee_menu" action="ResStock_action"/>
+
+    <!-- Form View -->
+    <record id="responsablestock_view_form" model="ir.ui.view">
+        <field name="name">Formulaire des responsables sur stock</field>
+        <field name="model">rachid.responsable.stock</field>
+        <field name="arch" type="xml">
+            <form>
+                <sheet>
+                    <group>
+                        <field name="image" widget="image" class="oe_avatar"/>
+                    </group>
+                    <group string="Informations générale">
+                        <group>
+                            <field name="employee_nom"/>
+                            <field name="employee_prenom"/>
+                        </group>
+                        <group>
+                            <field name="id_code"/>
+                            <field name="employee_adresse"/>
+                        </group>
+                    </group>
+
+                    <notebook>
+                        <group string="Contact">
+                            <group string="Adresse électronique">
+                                <field  name="employee_courriel"/>
+                                <field  name="employee_courriel2"/>
+                            </group>
+                            <group string="Téléphone">
+                                <field name="gsm1"/>
+                                <field name="gsm2"/>
+                            </group>
+                        </group>
+
+                        <group string="Affectation">
+                            <group string="Compte associé">
+                                <field  name="compte_id"/>
+                            </group>
+                            <group string="Roles associés">
+                                <field name="role_id">
+                                    <form>
+                                        <field name="id_role"/>
+                                        <field name="titre"/>
+                                        <field name="date_creation"/>
+									</form>
+									<tree>
+                                        <field name="id_role" width="15"/>
+                                        <field name="titre" width="65"/>
+                                        <field name="date_creation" width="20"/>
+                                    
+									</tree>
+                                </field>
+                            </group>
+                        </group>
+                    </notebook>
+
+                
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <!-- Tree(list) View -->
+    <record id="responsablestock_view_tree" model="ir.ui.view">
+        <field name="name">Liste des responsable sur stock</field>
+        <field name="model">rachid.responsable.stock</field>
+        <field name="arch" type="xml">
+            <tree >
+                <field name="id_code" width="6"/>
+                <field name="employee_nom" width="10"/>
+                <field name="employee_prenom" width="10"/>
+                <field name="employee_adresse" width="13"/>
+                <field name="employee_courriel" width="13"/>
+                <field name="employee_courriel2" width="13"/>
+                <field name="gsm1" width="10"/>
+                <field name="gsm2" width="10"/>
+                <field name="compte_id" width="8"/>
+                <field name="role_id" width="7"/>
+            </tree>
+        </field>
+    </record>
+
+    <!-- kanban View -->
+    <record id="responsablestock_dashboard" model="ir.ui.view">
+        <field name="name">rachid.responsable.stock.kanban</field>
+        <field name="model">rachid.responsable.stock</field>
+        <field name="priority">10</field>
+        <field name="arch" type="xml">
+            <kanban>
+                <field name = "image"/>
+                <field name = "employee_nom"/>
+                <field name = "employee_prenom"/>
+                <field name = "role_id"/>
+                <field name = "image"/>
+                <field name = "id_c"/>
+                <templates>
+                    <t t-name="kanban-box">
+                        <div class="oe_kanban_global_click">
+                            <div class="o_kanban_image d-md-none">
+                                <img class="o_kanban_image_inner_pic" 
+                                    t-att-src="kanban_image('rachid.employee', 'image', record.id_c.raw_value)"/>
+                            </div>
+                            <ul>
+                                <li t-if="record.employee_nom.raw_value"><a>Nom : </a> <field name="employee_nom"/></li>
+                                <li t-if="record.employee_prenom.raw_value">Prénom : <field name="employee_prenom"/></li>
+                                <li t-if="record.role_id.raw_value">Role: <field name="role_id"/></li> 
+                            </ul>
+                        </div>
+                    </t>
+                </templates>
+            </kanban>
+        </field>
+    </record>
+
+</odoo>

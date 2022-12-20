@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <record id='Bon_action' model='ir.actions.act_window'>
+        <field name="name">Bons</field>
+        <field name="res_model">rachid.bon</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+
+    <menuitem name="Operations" id="operation_menu" parent="stock_management" action="Bon_action"/>
+    <menuitem name="Bons" id="Bon_menu" parent="operation_menu" action="Bon_action"/>
+
+    <!-- Form View -->
+    <record id="bon_view_form" model="ir.ui.view">
+        <field name="name">Formulaire des bons</field>
+        <field name="model">rachid.bon</field>
+        <field name="arch" type="xml">
+            <form>
+                <sheet>
+                    <group string="Identifiants">
+                        <field name="Id_code"/>
+                        <field name="type_bon_id"/>
+                    </group>
+                    <group string="Informations générale">
+                        <field name="qty_bon"/>
+                        <field name="date_bon"/>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+</odoo>

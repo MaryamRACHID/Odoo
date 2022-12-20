@@ -1,0 +1,1 @@
+from . import rachid_entreprise, rachid_bon, rachid_role, rachid_type_bon, rachid_compte, rachid_demande, rachid_employee, rachid_fiche_mvt, rachid_fournisseur, rachid_magasinier, rachid_product, rachid_responsable_stock, rachid_stock, rachid_type_product, rachid_type_stock

@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <record id='typeProduit_action' model='ir.actions.act_window'>
+        <field name="name">Type de produit</field>
+        <field name="res_model">rachid.type.produit</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+
+    <menuitem name="Type de produit" id="typeProduit_menu" parent="config_menu" action="typeProduit_action"/>
+
+</odoo>

@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <record id='Fournisseur_action' model='ir.actions.act_window'>
+        <field name="name">Fournisseur</field>
+        <field name="res_model">rachid.fournisseur</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+
+    <menuitem name="Gestion de stock" id="stock_management"/>
+    <menuitem name="Fournisseur" id="Fournisseur_menu" parent="Association_menu" action="Fournisseur_action"/>
+
+</odoo>

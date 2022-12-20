@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <record id='Entreprise_action' model='ir.actions.act_window'>
+        <field name="name">Entreprise</field>
+        <field name="res_model">rachid.entreprise</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+
+    <menuitem name="Association" id="Association_menu" parent="stock_management"/>
+    <menuitem name="Entreprise" id="Entreprise_menu" parent="Association_menu" action="Entreprise_action"/>
+
+</odoo>

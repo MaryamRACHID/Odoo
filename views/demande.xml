@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <record id='Demande_action' model='ir.actions.act_window'>
+        <field name="name">Demande</field>
+        <field name="res_model">rachid.demande</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+
+    <menuitem name="Demande" id="Demande_menu" parent="operation_menu" action="Demande_action"/>
+
+</odoo>
