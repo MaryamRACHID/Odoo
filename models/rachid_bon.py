@@ -10,3 +10,4 @@ class Bon(models.Model):
     qty_bon = fields.Char('Quantité')
     date_bon = fields.Date('Date')
     type_bon_id = fields.Many2one('rachid.type.bon', string="Type")
+    stock = fields.Many2one('rachid.stock', string="stock") 
