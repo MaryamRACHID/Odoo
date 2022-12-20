@@ -11,5 +11,5 @@ class Stock(models.Model):
     label = fields.Char('Label')
     type_stock_id = fields.Many2one('rachid.type.stock', string="Type")
     bons = fields.One2many('rachid.bon', 'stock', string="Bons")
-
+ 
     product_id = fields.Many2one('rachid.product', string="Produits")

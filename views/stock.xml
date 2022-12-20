@@ -4,7 +4,7 @@
     <record id='Stock_action' model='ir.actions.act_window'>
         <field name="name">Stock</field>
         <field name="res_model">rachid.stock</field>
-        <field name="view_mode">tree,form,kanban,graph</field>
+        <field name="view_mode">tree,form,kanban,graph,pivot</field>
     </record>
 
     <menuitem name="Gestion de stock" id="stock_management" />
@@ -110,7 +110,20 @@
             <graph type="bar">
                 <field name="label"/>
                 <field name="qty_produit"/>
+                <field name="type_stock_id"/>
             </graph>
+        </field>
+    </record>
+
+    <!-- Pivot view -->
+    <record id="stock_view_pivot" model="ir.ui.view">
+        <field name="model">rachid.stock</field>
+        <field name="arch" type="xml">
+            <pivot>
+                <field name="Id_code" type="row"/>
+                <field name="qty_produit" type="col"/>
+                <field name="product_id" type="col"/>
+            </pivot>
         </field>
     </record>
 </odoo>

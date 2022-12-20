@@ -4,7 +4,7 @@
     <record id='Bon_action' model='ir.actions.act_window'>
         <field name="name">Bons</field>
         <field name="res_model">rachid.bon</field>
-        <field name="view_mode">tree,form</field>
+        <field name="view_mode">tree,form,kanban,graph</field>
     </record>
 
     <menuitem name="Operations" id="operation_menu" parent="stock_management" action="Bon_action"/>
@@ -27,6 +27,65 @@
                     </group>
                 </sheet>
             </form>
+        </field>
+    </record>
+
+    <!-- Tree(list) View -->
+    <record id="bon_view_tree" model="ir.ui.view">
+        <field name="name">Liste des bons</field>
+        <field name="model">rachid.bon</field>
+        <field name="arch" type="xml">
+            <tree >
+                <field name="Id_code" width="1"/>
+                <field name="qty_bon" width="1"/>
+                <field name="date_bon" width="2"/>
+                <field name="type_bon_id" width="1"/>
+                <field name="stock" width="2"/>
+            </tree>
+        </field>
+    </record>
+
+        <!-- kanban View -->
+    <record id="bon_dashboard" model="ir.ui.view">
+        <field name="name">rachid.bon.kanban</field>
+        <field name="model">rachid.bon</field>
+        <field name="priority">10</field>
+        <field name="arch" type="xml">
+            <kanban>
+                <field name = "Id_code"/>
+                <field name = "stock"/>
+                <field name = "qty_bon"/>
+                <field name = "type_bon_id"/>
+                <field name = "date_bon"/>
+                <templates>
+                    <t t-name="kanban-box">
+                        <div class="oe_kanban_global_click">
+                            <div class="o_kanban_image d-md-none">
+                                <img class="o_kanban_image_inner_pic" 
+                                    t-att-src="kanban_image('rachid.bon', 'image', record.Id_code.raw_value)"/>
+                            </div>
+                            <ul>
+                                <li t-if="record.Id_code.raw_value"><a>Référence : </a> <field name="Id_code"/></li>
+                                <li t-if="record.stock.raw_value">Label : <field name="stock"/></li> 
+                                <li t-if="record.qty_bon.raw_value">Produit: <field name="qty_bon"/></li>
+                                <li t-if="record.type_bon_id.raw_value">Quantité: <field name="type_bon_id"/></li> 
+                                <li t-if="record.date_bon.raw_value">Type de stock : <field name="date_bon"/></li> 
+                            </ul>
+                        </div>
+                    </t>
+                </templates>
+            </kanban>
+        </field>
+    </record>
+
+    <!-- Graph View -->
+    <record id="bon_view_graph" model="ir.ui.view">
+        <field name="model">rachid.bon</field>
+        <field name="arch" type="xml">
+            <graph type="bar">
+                <field name="Id_code"/>
+                <field name="qty_bon"/>
+            </graph>
         </field>
     </record>
 

@@ -9,4 +9,64 @@
 
     <menuitem name="Demande" id="Demande_menu" parent="operation_menu" action="Demande_action"/>
 
-</odoo>
+    <!-- Form View -->
+    <record id="demande_view_form" model="ir.ui.view">
+        <field name="name">demande formulaire</field>
+        <field name="model">rachid.demande</field>
+        <field name="arch" type="xml">
+            <form>
+                <sheet>
+                    <group string="Informations générale">
+                        <group>
+                            <field name="Id_code"/>
+                            <field name="reference" placeholder="Référence"/>
+                        </group>
+                        <group>
+                            <field name="qty_demande" />
+                            <field name="product_id" />
+                        </group>
+                    </group>
+
+                    <notebook>
+                        <group string="Information du vente">
+                            <group string="Client">
+                                <field  name="client_name"/>
+                                <field  name="client_adresse"/>
+                            </group>
+                            <group string="Contact">
+                                <field name="client_email"/>
+                                <field name="client_telephone"/>
+                            </group>
+                        </group>
+                        <group string="Commande">
+                            <group string="Bons">
+                                <field name="bons">
+                                    <form>
+                                        <group>
+                                            <field name="Id_code"/>
+                                            <field name="type_bon_id"/>
+                                        </group>
+                                        <group>
+                                            <field name="qty_bon"/>
+                                            <field name="date_bon"/>
+                                        </group>
+                                    </form>
+                                    <tree>
+                                        <field name="Id_code" width="1"/>
+                                        <field name="type_bon_id" width="1"/>
+                                        <field name="qty_bon" width="1"/>
+                                        <field name="date_bon" width="2"/>
+                                    </tree>
+                                </field>
+                            </group>
+                            <group string="Description">
+                                <field name="description_demande"/>
+                            </group>
+                        </group>
+                    </notebook>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+</odoo>  

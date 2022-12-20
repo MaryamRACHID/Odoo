@@ -55,13 +55,13 @@
                                         <field name="gsm2"/>
 									</form>
 									<tree>
-                                        <field name="code" width="10"/>
-                                        <field name="nom_resp" width="13"/>
-                                        <field name="prenom_resp" width="13"/>
-                                        <field name="adresse" width="19"/>
-                                        <field name="courriel" width="19"/>
-                                        <field name="gsm1" width="13"/>
-                                        <field name="gsm2" width="13"/>
+                                        <field name="code" width="2"/>
+                                        <field name="nom_resp" width="3"/>
+                                        <field name="prenom_resp" width="3"/>
+                                        <field name="adresse" width="4"/>
+                                        <field name="courriel" width="4"/>
+                                        <field name="gsm1" width="3"/>
+                                        <field name="gsm2" width="3"/>
 									</tree>
                                 </field>
                             </group>
