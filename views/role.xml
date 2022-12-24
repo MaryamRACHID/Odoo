@@ -7,6 +7,42 @@
         <field name="view_mode">tree,form</field>
     </record>
 
-    <menuitem name="Role" id="Role_menu" parent="config_menu" action="Role_action"/>
+    <menuitem name="Role d'employé" id="Role_menu" parent="Association_menu" action="Role_action"/>
+
+    <!-- Form View -->
+    <record id="role_view_form" model="ir.ui.view">
+        <field name="name">role formulaire</field>
+        <field name="model">rachid.role</field>
+        <field name="arch" type="xml">
+            <form>
+                <sheet>
+                    <group string="Informations générale">
+                        <group>
+                            <field name="id_role"/>
+                            <field name="titre"/>
+                            <field name="date_creation"/>
+                        </group>
+                    </group>
+                    <group  string="Description du role">
+                        <field name="description"/>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <!-- Tree(list) View -->
+    <record id="role_view_tree" model="ir.ui.view">
+        <field name="name">Liste des roles</field>
+        <field name="model">rachid.role</field>
+        <field name="arch" type="xml">
+            <tree >
+                <field name="id_role"/>
+                <field name="titre"/>
+                <field name="date_creation"/>
+                <field name="description"/>
+            </tree>
+        </field>
+    </record>
 
 </odoo>

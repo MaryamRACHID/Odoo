@@ -1,15 +1,30 @@
 # -*- coding: utf-8 -*-
 from odoo import api, models, fields
+from datetime import date
+from odoo.exceptions import ValidationError
+
+
 
 
 class Stock(models.Model):
     _name = 'rachid.stock'
+    _rec_name = "label" 
     _description = 'Stock'
 
-    Id_code = fields.Integer('Code')
+    Id_code = fields.Char('Code')
     qty_produit = fields.Integer('Quantité')
     label = fields.Char('Label')
-    type_stock_id = fields.Many2one('rachid.type.stock', string="Type")
     bons = fields.One2many('rachid.bon', 'stock', string="Bons")
  
     product_id = fields.Many2one('rachid.product', string="Produits")
+
+    @api.constrains('product_id','type_stock_id','qty_produit')
+    def validation_constraints(self):
+        res = []
+
+        modelObj = self.env['rachid.stock']        
+        for record in self:
+            res = modelObj.search([('product_id.product_nom', '=', record.product_id.product_nom),('id', 'not in', self.ids), ('type_stock_id', '=', record.type_stock_id)])
+            if res:
+                raise ValidationError("Stock deja existe, verifier la liste des stock")
+ 

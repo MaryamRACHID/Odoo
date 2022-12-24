@@ -4,6 +4,7 @@ from odoo import api, models, fields
 
 class Product(models.Model):
     _name = 'rachid.product'
+    _rec_name = "product_nom"
     _description = 'Produit'
 
     Id_code = fields.Integer('ID')
@@ -17,5 +18,10 @@ class Product(models.Model):
     cout_product = fields.Char('Coût')
     image = fields.Image("Image")
 
-    type_product = fields.Many2one('rachid.type.produit', string="Type")
+    type_product = fields.Selection([
+        ('consu', 'Sortie'),
+        ('service', 'Service'),
+        ('stock', 'produit stockable')], default="stock", string='Type', required=True)
+
+    bons = fields.One2many('rachid.bon', 'stock', string="Bons")
     fournisseur_id = fields.Many2many('rachid.fournisseur', string="Fournisseurs")

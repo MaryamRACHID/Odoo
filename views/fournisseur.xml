@@ -4,10 +4,97 @@
     <record id='Fournisseur_action' model='ir.actions.act_window'>
         <field name="name">Fournisseur</field>
         <field name="res_model">rachid.fournisseur</field>
-        <field name="view_mode">tree,form</field>
+        <field name="view_mode">tree,form,kanban</field>
     </record>
 
     <menuitem name="Gestion de stock" id="stock_management"/>
     <menuitem name="Fournisseur" id="Fournisseur_menu" parent="Association_menu" action="Fournisseur_action"/>
 
-</odoo>
+    <!-- Form View -->
+    <record id="fournisseur_view_form" model="ir.ui.view">
+        <field name="name">Fournisseur formulaire</field>
+        <field name="model">rachid.fournisseur</field>
+        <field name="arch" type="xml">
+            <form>
+                <sheet>
+                    <group string="Informations générale">
+                        <group>
+                            <field name="Id_code"/>
+                            <field name="nom_resp"/>
+                            <field name="prenom_resp"/>
+                        </group>
+                        <group>
+                            <field name="Id_code"/>
+                            <field name="adresse" />
+                            <field name="entreprise_id"/>
+                        </group>
+                    </group>
+
+                        <notebook>
+                            <group string="Contact">
+                                <group>
+                                    <field  name="courriel"/>
+                                    <field  name="fax"/>
+                                </group>
+                                <group>
+                                    <field name="gsm1"/>
+                                    <field name="gsm2"/>
+                                </group>
+                            </group>
+                        </notebook>
+                </sheet> 
+            </form>
+        </field>
+    </record>
+
+    <!-- Tree(list) View -->
+    <record id="fournisseur_view_tree" model="ir.ui.view">
+        <field name="name">Liste des fournisseurs</field>
+        <field name="model">rachid.fournisseur</field>
+        <field name="arch" type="xml">
+            <tree >
+                <field name="Id_code"/>
+                <field name="nom_resp"/>
+                <field name="prenom_resp"/>
+                <field name="entreprise_id"/>
+                <field name="adresse"/>
+                <field name="courriel"/>
+                <field name="fax"/>
+                <field name="gsm1"/>
+                <field name="gsm2"/>
+            </tree>
+        </field>
+    </record>
+
+    <!-- kanban View -->
+    <record id="fournisseur_dashboard" model="ir.ui.view">
+        <field name="name">rachid.fournisseur.kanban</field>
+        <field name="model">rachid.fournisseur</field>
+        <field name="priority">10</field>
+        <field name="arch" type="xml">
+            <kanban> 
+                <field name = "Id_code"/>
+                <field name = "nom_resp"/>
+                <field name="entreprise_id"/>
+                <field name = "prenom_resp"/>
+                <field name = "courriel"/>
+                <field name = "gsm1"/>
+                <templates>
+                    <t t-name="kanban-box">
+                        <div>
+                            <ul>
+                                <li t-if="record.Id_code.raw_value"><a>Code référentiel</a>: <field name="Id_code"/></li>
+                                <li t-if="record.nom_resp.raw_value">Nome: <field name="nom_resp"/></li>
+                                <li t-if="record.entreprise_id.raw_value">Entreprise: <field name="entreprise_id"/></li> 
+                                <li t-if="record.prenom_resp.raw_value">Prénom: <field name="prenom_resp"/></li> 
+                                <li t-if="record.courriel.raw_value">Courriel: <field name="courriel"/></li> 
+                                <li t-if="record.gsm1.raw_value">Téléphone: <field name="gsm1"/></li> 
+                            </ul>
+                        </div>
+                    </t>
+                </templates>
+            </kanban>
+        </field>
+    </record>
+    
+</odoo> 

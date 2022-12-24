@@ -4,6 +4,7 @@ from odoo import api, models, fields
 
 class Compte(models.Model):
     _name = 'rachid.compte'
+    _rec_name = "alias"
     _description = 'Compte'
 
     Id_code = fields.Integer('ID')

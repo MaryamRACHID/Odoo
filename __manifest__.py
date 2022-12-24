@@ -21,9 +21,6 @@
             'views/product.xml',
             'views/responsableStock.xml',
             'views/stock.xml',
-            'views/typeBon.xml',
-            'views/typeProduct.xml',
-            'views/typeStock.xml',
             'views/role.xml'
    ],
    'demo': [],

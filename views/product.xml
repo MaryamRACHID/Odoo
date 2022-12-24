@@ -4,7 +4,7 @@
     <record id='Produit_action' model='ir.actions.act_window'>
         <field name="name">Produit</field>
         <field name="res_model">rachid.product</field>
-        <field name="view_mode">tree,form,kanban</field>
+        <field name="view_mode">tree,form,kanban,graph</field>
     </record>
 
     <menuitem name="Produit" id="Produit_menu" parent="stock_management" action="Produit_action"/>
@@ -46,7 +46,7 @@
                             <group string="Fournissuers">
                                 <field name="fournisseur_id">
                                     <form>
-                                        <field name="code"/>
+                                        <field name="Id_code"/>
                                         <field name="nom_resp"/>
                                         <field name="prenom_resp"/>
                                         <field name="adresse"/>
@@ -55,7 +55,7 @@
                                         <field name="gsm2"/>
 									</form>
 									<tree>
-                                        <field name="code" width="2"/>
+                                        <field name="Id_code" width="2"/>
                                         <field name="nom_resp" width="3"/>
                                         <field name="prenom_resp" width="3"/>
                                         <field name="adresse" width="4"/>
@@ -136,6 +136,18 @@
             </kanban>
         </field>
     </record>
-
+ 
+     <!-- Graph View -->
+    <record id="produit_view_graph" model="ir.ui.view">
+        <field name="model">rachid.product</field>
+        <field name="arch" type="xml">
+            <graph type="bar">
+                <field name="product_nom"/>
+                <field name="sale_prix"/>
+                <field name="customer_taxes"/>
+                <field name="cout_product"/>
+            </graph>
+        </field>
+    </record>
  
 </odoo> 

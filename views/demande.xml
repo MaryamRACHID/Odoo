@@ -4,7 +4,7 @@
     <record id='Demande_action' model='ir.actions.act_window'>
         <field name="name">Demande</field>
         <field name="res_model">rachid.demande</field>
-        <field name="view_mode">tree,form</field>
+        <field name="view_mode">tree,form,kanban,graph,calendar</field>
     </record>
 
     <menuitem name="Demande" id="Demande_menu" parent="operation_menu" action="Demande_action"/>
@@ -20,10 +20,12 @@
                         <group>
                             <field name="Id_code"/>
                             <field name="reference" placeholder="Référence"/>
+                            <field name="date_recp_demande"/>
                         </group>
                         <group>
                             <field name="qty_demande" />
                             <field name="product_id" />
+                            <field name="date_verif_demande" />
                         </group>
                     </group>
 
@@ -39,6 +41,9 @@
                             </group>
                         </group>
                         <group string="Commande">
+                            <group string="Description">
+                                <field name="description_demande"/>
+                            </group>
                             <group string="Bons">
                                 <field name="bons">
                                     <form>
@@ -59,13 +64,84 @@
                                     </tree>
                                 </field>
                             </group>
-                            <group string="Description">
-                                <field name="description_demande"/>
-                            </group>
                         </group>
                     </notebook>
                 </sheet>
             </form>
+        </field>
+    </record>
+
+    !-- Tree(list) View -->
+    <record id="demande_view_tree" model="ir.ui.view">
+        <field name="name">Liste des demandes</field>
+        <field name="model">rachid.demande</field>
+        <field name="arch" type="xml">
+            <tree >
+                <field name="Id_code" width="1"/>
+                <field name="reference" width="2"/>
+                <field name="product_id" width="2"/>
+                <field name="qty_demande" width="1"/>
+                <field name="client_name" width="2"/>
+                <field name="date_recp_demande" width="2"/>
+                <field name="date_verif_demande" width="2"/>
+                <field name="bons" width="2"/>
+            </tree>
+        </field>
+    </record>
+
+     <!-- kanban View -->
+    <record id="demande_dashboard" model="ir.ui.view">
+        <field name="name">rachid.demande.kanban</field>
+        <field name="model">rachid.demande</field>
+        <field name="priority">10</field>
+        <field name="arch" type="xml">
+            <kanban>
+                <field name = "Id_code"/>
+                <field name = "reference"/>
+                <field name = "product_id"/>
+                <field name = "qty_demande"/>
+                <field name = "client_name"/>
+                <field name = "date_recp_demande"/>
+                <field name = "date_verif_demande"/>
+                <templates>
+                    <t t-name="kanban-box">
+                        <div class="oe_kanban_global_click">
+                            <ul>
+                                <li t-if="record.Id_code.raw_value"><a>Nom : </a> <field name="Id_code"/></li>
+                                <li t-if="record.reference.raw_value">Prénom : <field name="reference"/></li>
+                                <li t-if="record.product_id.raw_value">Role: <field name="product_id"/></li> 
+                                <li t-if="record.qty_demande.raw_value">Role: <field name="qty_demande"/></li> 
+                                <li t-if="record.client_name.raw_value">Role: <field name="client_name"/></li> 
+                                <li t-if="record.date_recp_demande.raw_value">Role: <field name="date_recp_demande"/></li> 
+                                <li t-if="record.date_verif_demande.raw_value">Role: <field name="date_verif_demande"/></li> 
+                            </ul>
+                        </div>
+                    </t>
+                </templates>
+            </kanban>
+        </field>
+    </record>
+
+    <!-- Graph view -->
+    <record id="demande_view_graph" model="ir.ui.view">
+        <field name="model">rachid.demande</field>
+        <field name="arch" type="xml">
+            <graph type="bar">
+                <field name="client_email"/>
+                <field name="qty_demande"/>
+                <!--<field name="date_diff"/>-->
+                
+            </graph>
+        </field>
+    </record>
+
+    <!-- Calander view -->
+    <record id="demande_view_calendar" model="ir.ui.view">
+        <field name="model">rachid.demande</field>
+        <field name="arch" type="xml">
+            <calendar date_start="date_recp_demande" date_stop="date_verif_demande">
+                <field name="reference"/>
+            </calendar>
         </field>
     </record>
 

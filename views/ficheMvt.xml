@@ -4,9 +4,118 @@
     <record id='Fiche_action' model='ir.actions.act_window'>
         <field name="name">Fiche de mouvement</field>
         <field name="res_model">rachid.fiche.mvt</field>
-        <field name="view_mode">tree,form</field>
+        <field name="view_mode">tree,form,kanban</field>
     </record>
 
     <menuitem name="Fiche de mouvement" id="Fiche_menu" parent="operation_menu" action="Fiche_action"/>
 
-</odoo>
+        <!-- Form View -->
+    <record id="ficheMvt_view_form" model="ir.ui.view">
+        <field name="name">Formulaire</field>
+        <field name="model">rachid.fiche.mvt</field>
+        <field name="arch" type="xml">
+            <form>
+                <sheet>
+                    <group string="Informations générale">
+                        <group>
+                            <field name="Id_code" placeholder="Alias"/>
+                            <field name="reference" placeholder="Alias"/>
+                        </group>
+                        <group>
+                            <field name="date_verif" />
+                        </group>
+                    </group>
+ 
+                        <notebook>
+                            <group string="Stock source">
+                                <group>
+                                    <field name="stock_id"/>
+                                    <field name="responsable" />
+                                </group>
+                            <group string="Bons">
+                                <field name="bons">
+                                    <form>
+                                        <group>
+                                            <field name="Id_code"/>
+                                            <field name="type_bon_id"/>
+                                        </group>
+                                        <group>
+                                            <field name="qty_bon"/>
+                                            <field name="date_bon"/>
+                                        </group>
+                                    </form>
+                                    <tree>
+                                        <field name="Id_code" width="1"/>
+                                        <field name="type_bon_id" width="1"/>
+                                        <field name="qty_bon" width="1"/>
+                                        <field name="date_bon" width="2"/>
+                                    </tree>
+                                </field>
+                            </group>
+                            </group>
+                            <group string="Demande effectuée">
+                                <group>
+                                    <field  name="demande"/>
+                                    <field  name="product"/>
+                                </group>
+                                <group>
+                                    <field name="description" placeholder="Description"/>
+                                </group>
+                            </group>
+                        </notebook>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <!-- Tree(list) View -->
+    <record id="mvt_view_tree" model="ir.ui.view">
+        <field name="name">rachid.fiche.mvt</field>
+        <field name="model">rachid.fiche.mvt</field>
+        <field name="arch" type="xml">
+            <tree >
+                <field name="Id_code"/>
+                <field name="reference"/>
+                <field name="date_verif"/>
+                <field name="demande"/>
+                <field name="stock_id"/>
+                <field name="responsable"/>
+                <field name="description"/>
+            </tree>
+        </field>
+    </record>
+
+    <!-- kanban View -->
+    <record id="mvt_dashboard" model="ir.ui.view">
+        <field name="name">rachid.fiche.mvt.kanban</field>
+        <field name="model">rachid.fiche.mvt</field>
+        <field name="priority">10</field>
+        <field name="arch" type="xml">
+            <kanban>
+                <field name="Id_code"/>
+                <field name="reference"/>
+                <field name="date_verif"/>
+                <field name="demande"/>
+                <field name="stock_id"/>
+                <field name="responsable"/>
+                <field name="description"/>
+                <templates>
+                    <t t-name="kanban-box">
+                        <div>
+                            <ul>
+                                <li t-if="record.Id_code.raw_value"><a>Identifiant</a>: <field name="Id_code"/></li>
+                                <li t-if="record.reference.raw_value">Référence: <field name="reference"/></li>
+                                <li t-if="record.date_verif.raw_value">Date de mouvement: <field name="date_verif"/></li>
+                                <li t-if="record.demande.raw_value">Demande: <field name="demande"/></li>
+                                <li t-if="record.stock_id.raw_value">Stock: <field name="stock_id"/></li>
+                                <li t-if="record.responsable.raw_value">Responsable du stock: <field name="responsable"/></li>
+                                <li t-if="record.description.raw_value">Description du mouvement: <field name="description"/></li>
+                            </ul>
+                        </div>
+                    </t>
+                </templates>
+            </kanban>
+        </field>
+    </record>
+
+</odoo> 

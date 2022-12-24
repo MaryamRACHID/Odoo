@@ -4,6 +4,7 @@ from odoo import api, models, fields
 
 class Employee(models.Model):
     _name = 'rachid.employee'
+    _rec_name = "employee_nom"
     _description = 'Employee'
 
     id_code = fields.Char('Code')

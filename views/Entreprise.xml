@@ -4,10 +4,135 @@
     <record id='Entreprise_action' model='ir.actions.act_window'>
         <field name="name">Entreprise</field>
         <field name="res_model">rachid.entreprise</field>
-        <field name="view_mode">tree,form</field>
+        <field name="view_mode">tree,form,kanban</field>
     </record>
 
     <menuitem name="Association" id="Association_menu" parent="stock_management"/>
     <menuitem name="Entreprise" id="Entreprise_menu" parent="Association_menu" action="Entreprise_action"/>
 
-</odoo>
+
+    <!-- Form View -->
+    <record id="entreprise_view_form" model="ir.ui.view">
+        <field name="name">Formulaire</field>
+        <field name="model">rachid.entreprise</field>
+        <field name="arch" type="xml">
+            <form>
+                <sheet>
+                    <group>
+                        <field name="image" widget="image" class="oe_avatar"/>
+                    </group>
+                    <group string="Informations générale">
+                        <group>
+                            <field name="Id_code"/>
+                            <field name="entreprise_nom"/>
+                            <field name="entreprise_adresse"/>
+                        </group>
+                        <group>
+                            <field name="description"/>
+                        </group>
+                    </group>
+
+                        <notebook>
+                            <group string="Contact">
+                                <group>
+                                    <field  name="entreprise_courriel"/>
+                                    <field  name="entreprise_tel"/>
+                                    <field  name="entreprise_website"/>
+                                </group>
+                            </group>
+                            <group string="Responsable d'approvisionnement">
+                                <group>
+                                    <field name="fournisseurs">
+                                        <form>
+                                            <sheet>
+                                                <group string="Informations générale">
+                                                    <group>
+                                                        <field name="nom_resp"/>
+                                                        <field name="prenom_resp"/>
+                                                    </group>
+                                                    <group>
+                                                        <field name="Id_code"/>
+                                                        <field name="adresse" />
+                                                    </group>
+                                                </group>
+
+                                                    <notebook>
+                                                        <group string="Contact">
+                                                            <group>
+                                                                <field  name="courriel"/>
+                                                                <field  name="fax"/>
+                                                            </group>
+                                                            <group>
+                                                                <field name="gsm1"/>
+                                                                <field name="gsm2"/>
+                                                            </group>
+                                                        </group>
+                                                    </notebook>
+                                            </sheet> 
+                                        </form>
+                                    <tree>
+                                        <field name="Id_code"/>
+                                        <field name="nom_resp"/>
+                                        <field name="prenom_resp"/>
+                                        <field name="courriel"/>
+                                        <field name="gsm1"/>
+                                        <field name="gsm2"/>
+                                    </tree>
+                                    </field>
+                                </group>
+                            </group>
+                        </notebook>
+                </sheet> 
+            </form>
+        </field>
+    </record>
+
+    <!-- Tree(list) View -->
+    <record id="entreprise_view_tree" model="ir.ui.view">
+        <field name="name">Liste des entreprises</field>
+        <field name="model">rachid.entreprise</field>
+        <field name="arch" type="xml">
+            <tree >
+                <field name="Id_code"/>
+                <field name="entreprise_nom"/>
+                <field name="entreprise_adresse"/>
+                <field name="description"/>
+                <field  name="entreprise_courriel"/>
+                <field  name="entreprise_tel"/>
+                <field  name="entreprise_website"/>
+                <field name="fournisseurs"/>
+            </tree>
+        </field>
+    </record>
+
+    <!-- kanban View -->
+    <record id="fournisseur_dashboard" model="ir.ui.view">
+        <field name="name">rachid.entreprise.kanban</field>
+        <field name="model">rachid.entreprise</field>
+        <field name="priority">10</field>
+        <field name="arch" type="xml">
+            <kanban>
+                <field name="Id_code"/>
+                <field name="entreprise_nom"/>
+                <field name="entreprise_adresse"/>
+                <field name="description"/>
+                <field  name="entreprise_courriel"/>
+                <field  name="entreprise_tel"/>
+                <templates>
+                    <t t-name="kanban-box">
+                        <div>
+                            <ul>
+                                <li t-if="record.Id_code.raw_value"><a>Code référentiel</a>: <field name="Id_code"/></li>
+                                <li t-if="record.entreprise_nom.raw_value">Nome: <field name="entreprise_nom"/></li>
+                                <li t-if="record.entreprise_adresse.raw_value">Entreprise: <field name="entreprise_adresse"/></li> 
+                                <li t-if="record.entreprise_courriel.raw_value">Prénom: <field name="entreprise_courriel"/></li> 
+                                <li t-if="record.entreprise_tel.raw_value">Téléphone: <field name="entreprise_tel"/></li> 
+                            </ul>
+                        </div>
+                    </t>
+                </templates>
+            </kanban>
+        </field>
+    </record>
+
+</odoo> 

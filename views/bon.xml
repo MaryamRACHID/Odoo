@@ -20,6 +20,7 @@
                     <group string="Identifiants">
                         <field name="Id_code"/>
                         <field name="type_bon_id"/>
+                        <field name="fiche_mvt"/>
                     </group>
                     <group string="Informations générale">
                         <field name="qty_bon"/>
