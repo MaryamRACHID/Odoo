@@ -9,6 +9,7 @@ class Bon(models.Model):
     _rec_name = "Id_code"
     _description = 'Bon Rédigé'
 
+    id_int = fields.Integer('ID')
     Id_code = fields.Char('Référence')
     qty_bon = fields.Integer('Quantité')
     date_bon = fields.Date('Date')
@@ -19,6 +20,12 @@ class Bon(models.Model):
     demande_bon = fields.Many2one('rachid.demande', string="Demande")  
     fiche_mvt = fields.Many2one('rachid.fiche.mvt', string="Fiche de mouvement")  
 
+    @api.model
+    def create(self, values):
+       thisTable=self.env['rachid.bon'].search([('id','<>',0)])
+       values["id_int"] = len(thisTable)+1
+       _object = super(Bon, self).create(values)
+       return _object
 
     @api.constrains('date_bon')
     def validation_constrains(self):
@@ -27,7 +34,6 @@ class Bon(models.Model):
             if rec.date_bon > today:
                 raise ValidationError("Date invalide")
 
-    
  
     @api.onchange('fiche_mvt')
     def update_product(self):

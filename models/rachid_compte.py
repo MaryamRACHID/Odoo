@@ -14,3 +14,9 @@ class Compte(models.Model):
 
     entreprise_id = fields.Many2one('rachid.entreprise', string="Entreprise")
     
+    @api.model
+    def create(self, values):
+       thisTable=self.env['rachid.compte'].search([('id','<>',0)])
+       values["Id_code"] = len(thisTable)+1
+       _object = super(Compte, self).create(values)
+       return _object

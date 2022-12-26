@@ -18,8 +18,8 @@
                 <sheet>
                     <group string="Informations générale">
                         <group>
-                            <field name="Id_code" placeholder="Alias"/>
-                            <field name="reference" placeholder="Alias"/>
+                            <field name="Id_code" placeholder="Code alphanémurique"/>
+                            <field name="reference" placeholder="Référence"/>
                         </group>
                         <group>
                             <field name="date_verif" />
@@ -35,7 +35,7 @@
                             <group string="Bons">
                                 <field name="bons">
                                     <form>
-                                        <group>
+                                        <group> 
                                             <field name="Id_code"/>
                                             <field name="type_bon_id"/>
                                         </group>
@@ -81,6 +81,7 @@
                 <field name="stock_id"/>
                 <field name="responsable"/>
                 <field name="description"/>
+                <field name="bons"/>
             </tree>
         </field>
     </record>

@@ -21,3 +21,11 @@ class Employee(models.Model):
 
     compte_id = fields.Many2one('rachid.compte', string="Compte")
     role_id = fields.Many2many('rachid.role',string='Role')
+
+    
+    @api.model
+    def create(self, values):
+       thisTable=self.env['rachid.employee'].search([('id','<>',0)])
+       values["id_code"] = len(thisTable)+1
+       _object = super(Employee, self).create(values)
+       return _object

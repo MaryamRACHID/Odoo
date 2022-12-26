@@ -9,3 +9,11 @@ class ResponsableStock(models.Model):
     _inherit = 'rachid.employee'
 
     Id_code = fields.Integer('ID')
+
+                 
+    @api.model
+    def create(self, values):
+       thisTable=self.env['rachid.responsable.stock'].search([('id','<>',0)])
+       values["Id_code"] = len(thisTable)+1
+       _object = super(ResponsableStock, self).create(values)
+       return _object

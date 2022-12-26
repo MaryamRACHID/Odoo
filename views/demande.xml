@@ -15,6 +15,12 @@
         <field name="model">rachid.demande</field>
         <field name="arch" type="xml">
             <form>
+                <header>
+                        <button name="make_recu" string="Demande reçue" type="object" />
+                        <button name="make_enc" string="Demande en cours" type="object" />
+                        <button name="make_realisee" string="Demande réalisée" type="object" />
+                        <field name="state" widget="statusbar"/>
+                </header>
                 <sheet>
                     <group string="Informations générale">
                         <group>
@@ -85,6 +91,7 @@
                 <field name="date_recp_demande" width="2"/>
                 <field name="date_verif_demande" width="2"/>
                 <field name="bons" width="2"/>
+                <field name="state" width="2"/>
             </tree>
         </field>
     </record>
@@ -127,10 +134,8 @@
         <field name="model">rachid.demande</field>
         <field name="arch" type="xml">
             <graph type="bar">
-                <field name="client_email"/>
-                <field name="qty_demande"/>
-                <!--<field name="date_diff"/>-->
-                
+                <field name="reference"/>
+                <field name="date_diff"/>                
             </graph>
         </field>
     </record>

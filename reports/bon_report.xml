@@ -1,0 +1,38 @@
+<?xml version='1.0' encoding='utf-8'?>
+<odoo>
+    <data >
+        <template id="print_bons">
+            <t t-call="web.basic_layout">
+                <div class="page">
+                    <t t-foreach="docs" t-as="bon">
+                        <div class="col-md-6">
+                            <table >
+                                <td style="width:67%" valign="center">
+                                    <table style="width:155pt; height:85pt">
+                                        <tr><th>Code : </th></tr>
+                                        <tr><th><t t-esc="bon"/></th></tr>
+                                        <tr><td>Quantité : </td></tr>
+                                        <tr><td><t t-esc="bon.qty_bon"/></td></tr>
+                                    </table>
+                                </td>
+                            </table>
+                        </div>
+                    </t>
+                </div>
+            </t>
+        </template>
+    </data>
+
+    <record id="bons_print" model="ir.actions.report">
+        <field name="name">Print bons</field>
+        <field name="model">rachid.bon</field>
+        <field name="report_type">qweb-pdf</field>
+        <field name="report_name">MARYAM_RACHID.print_bons</field>
+        <field name="report_file">MARYAM_RACHID.print_bons</field>
+        <field name="print_report_name">'Bons - %s' % (object.code).replace('/', '')</field>
+        <field name="binding_model_id" ref="model_rachid_bons"/>
+        <field name="binding_type">report</field>
+    </record>
+   
+    
+</odoo>

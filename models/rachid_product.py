@@ -25,3 +25,10 @@ class Product(models.Model):
 
     bons = fields.One2many('rachid.bon', 'stock', string="Bons")
     fournisseur_id = fields.Many2many('rachid.fournisseur', string="Fournisseurs")
+             
+    @api.model
+    def create(self, values):
+       thisTable=self.env['rachid.product'].search([('id','<>',0)])
+       values["Id_code"] = len(thisTable)+1
+       _object = super(Product, self).create(values)
+       return _object

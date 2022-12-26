@@ -21,7 +21,8 @@
             'views/product.xml',
             'views/responsableStock.xml',
             'views/stock.xml',
-            'views/role.xml'
+            'views/role.xml',
+            'security/groups.xml'
    ],
    'demo': [],
    'installable': True,

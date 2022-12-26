@@ -16,4 +16,10 @@ class Fournisseur(models.Model):
 
     product_ids = fields.One2many('rachid.product','fournisseur_id',string='Produit')
     entreprise_id = fields.Many2one('rachid.entreprise',string='Entreprise')
-     
+         
+    @api.model
+    def create(self, values):
+       thisTable=self.env['rachid.fournisseur'].search([('id','<>',0)])
+       values["Id_code"] = len(thisTable)+1
+       _object = super(Fournisseur, self).create(values)
+       return _object

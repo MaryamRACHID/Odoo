@@ -8,7 +8,8 @@ class fiche_mvt(models.Model):
     _name = 'rachid.fiche.mvt'
     _rec_name = "reference"
     _description = 'Fiche de mouvement'
-
+    
+    id_int = fields.Integer('ID')
     Id_code = fields.Char('Identifiant')
     reference = fields.Char('Référence')
     stock_id = fields.Many2one('rachid.stock', string="Stock")
@@ -23,6 +24,13 @@ class fiche_mvt(models.Model):
         ('entree', 'Entrée')], string='Type', default='sortie',required=True)
 
 
+    
+    @api.model
+    def create(self, values):
+       thisTable=self.env['rachid.fiche.mvt'].search([('id','<>',0)])
+       values["id_int"] = len(thisTable)+1
+       _object = super(fiche_mvt, self).create(values)
+       return _object
 
  
     @api.onchange('stock_id','demande')
@@ -36,8 +44,10 @@ class fiche_mvt(models.Model):
             raise ValidationError("Le stock ne support pas la demande")
 
         
-
     @api.onchange('demande')
     def update_product(self):
         self.product = self.demande.product_id.product_nom
+        if(self.bons):
+            self.demande.state = 'realisee'
+
  
